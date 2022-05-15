@@ -179,28 +179,7 @@ class _PhuHuynhState extends State<PhuHuynh> {
                                   ],
                                 ),                               
                               ),
-                             Container(
-                                margin: EdgeInsets.only(
-                                  top: 50,
-                                  left: 100,
-                                  right: 100,
-                                ),
-                                padding: EdgeInsets.all(2),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromRGBO(35, 175, 125, 0.85)),
-                                child: RawMaterialButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    "Cập nhật",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
+                             
                             ],
                           ),                          
                         ),

@@ -2,6 +2,8 @@
 import 'dart:convert';
 // import 'package:canh_bao_hoc_vu/model/model_phuhuynh.dart';
 import 'package:canh_bao_hoc_vu/screen/diemthi.dart';
+import 'package:canh_bao_hoc_vu/screen/gvcn.dart';
+import 'package:canh_bao_hoc_vu/screen/hocphi.dart';
 import 'package:canh_bao_hoc_vu/screen/lichhoc_diemdanh.dart';
 import 'package:canh_bao_hoc_vu/screen/reset_password.dart';
 import 'package:canh_bao_hoc_vu/screen/student_detail.dart';
@@ -43,9 +45,12 @@ class MyApp extends StatelessWidget {
         '/phuhuynh': (context) => PhuHuynh(),
         '/sinhvien': (context) => StudentDetails(),
         '/sinhvien1': (context) => StudentDetail(),
+        '/sinhvien2':(context) => DiemThi(),
         //'sinhvien1': (context) => StudentDetail(),
         '/thoikhoabieu': (context)=> LichHocDiemDanh(),
         '/diem':(context) => DiemThi(),
+        '/hocphi':(context) =>HocPhi(),
+        '/gvcn':(context) => GVCN(),
          
       },
       debugShowCheckedModeBanner: false,
@@ -245,19 +250,28 @@ class _LoginPageState extends State<LoginPage> {
   
   Future<void> login() async{
     if(passController.text.isNotEmpty && sdtController.text.isNotEmpty){
-     var response = await http.post(
+     
+      try {
+        var response = await http.post(
       Uri.parse("http://quanlyhocvu.tk/api/login?sdt="
        + sdtController.text + "&password=" + passController.text));
      var data = jsonDecode(response.body);
      var pa = data["phuhuynh"];
      var sv = data["sinhvien"];
-     print(sv);
      var isLogin = false;
+     
           Navigator.pushNamed(context, '/homepage', arguments: {"name":pa['tenph'], 
           "sodt":pa['sodt'], "diachi":pa['diachi'], "sv": sv});
          
           //Navigator.pushNamed(context, 'home/sinhvien',arguments: {"tensv":sv['tensv'],"masv":sv['masv']});
          print("Dang nhap thanh cong!");
+      } on Exception catch (_) {
+            ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content:  Text("Sai tài khoản hoặc mật khẩu !!"),backgroundColor: Colors.red,));
+        }
+        
+      }
+    
       
       
         
@@ -280,4 +294,3 @@ class _LoginPageState extends State<LoginPage> {
     //  }
      }
   }
-}

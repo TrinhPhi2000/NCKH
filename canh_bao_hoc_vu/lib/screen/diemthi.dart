@@ -43,7 +43,10 @@ class _DiemThiState extends State<DiemThi> {
   @override
   Widget build(BuildContext context) {
     var diem = [];
+    var sv = [];
     final rcvdData = ModalRoute.of(context)!.settings.arguments as Map;
+    sv = rcvdData['sv'];
+   
     diem = rcvdData['diem'];
     List<DataRow> arr = [];
     diem2.forEach((element) {
@@ -54,74 +57,10 @@ class _DiemThiState extends State<DiemThi> {
             element["tenhp"],
             style: TextStyle(fontWeight: FontWeight.bold),
           )),
-          DataCell(Text("ffsf")),
-          DataCell(Text("1")),
+          DataCell(Text(element["Diemtk"])),
+          DataCell(Text(element["diemquydoi"])),
           DataCell(Text('Đạt')),
-          DataCell(IconButton(
-            icon: Icon(
-              Icons.article_outlined,
-              color: Colors.orange,
-              size: 25,
-            ),
-            onPressed: (){
-              showDialog(
-                context: context, 
-                builder: (context) => AlertDialog(
-                  content: Container(
-                    height: 300,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text("Bao tri may tinh"),
-                        ),
-                        Container(
-                          // child: DataTable(
-                          //           columns: const <DataColumn>[
-                          //             DataColumn(
-                          //               label: Text(
-                          //                 'Tên Thành Phần',
-                          //                 style: TextStyle(
-                          //                     fontSize: 12,
-                          //                     fontWeight: FontWeight.bold),
-                          //               ),
-                          //             ),
-                          //             DataColumn(
-                          //               label: Text(
-                          //                 'Điểm lần 1',
-                          //                 style: TextStyle(
-                          //                     fontSize: 12,
-                          //                     fontWeight: FontWeight.bold),
-                          //               ),
-                          //             ),
-                          //             DataColumn(
-                          //               label: Text(
-                          //                 'Điểm lần 2',
-                          //                 style: TextStyle(
-                          //                     fontSize: 12,
-                          //                     fontWeight: FontWeight.bold),
-                          //               ),
-                          //             ),
-                          //             DataColumn(
-                          //               label: Text(
-                          //                 'Điểm lần 3',
-                          //                 style: TextStyle(
-                          //                     fontSize: 12,
-                          //                     fontWeight: FontWeight.bold),
-                          //               ),
-                          //             ),
-                                     
-                          //           ],
-                          //           rows: arr
-                          //         ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ));
-            },
-          )
-          
-          ),
+         
         ],
       ),
     );
@@ -168,8 +107,8 @@ class _DiemThiState extends State<DiemThi> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Container(
-                                      child: const Text(
-                                        "Trinh Van An",
+                                      child:  Text(
+                                        sv[0]["tensv"],
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,
@@ -180,15 +119,15 @@ class _DiemThiState extends State<DiemThi> {
                                       margin: const EdgeInsets.only(
                                           top: 10, right: 75),
                                       child: RichText(
-                                        text: const TextSpan(children: [
-                                          const TextSpan(
+                                        text:  TextSpan(children: [
+                                           TextSpan(
                                               text: "MSSV: ",
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 14)),
-                                          const TextSpan(
-                                              text: "1812818",
+                                           TextSpan(
+                                              text:  sv[0]["masv"],
                                               style: const TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
@@ -450,14 +389,7 @@ class _DiemThiState extends State<DiemThi> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      DataColumn(
-                                        label: Text(
-                                          'Chi tiết',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
+                                      
                                     ],
                                     rows: arr
                                   ),

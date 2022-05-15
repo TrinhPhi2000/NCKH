@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> sinhvien() async{
           Navigator.pushNamed(context, '/sinhvien', arguments: { "sv":sv,
           });
-          print(sv);
+          
   }
 }
 Widget buildCardStudent({

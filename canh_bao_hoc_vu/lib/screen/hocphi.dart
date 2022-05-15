@@ -2,6 +2,7 @@
 
 import 'package:canh_bao_hoc_vu/screen/bottomNavyBar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 class HocPhi extends StatefulWidget {
@@ -12,10 +13,32 @@ class HocPhi extends StatefulWidget {
 }
 
 class _HocPhiState extends State<HocPhi> {
-  String? selectedValue ;
-  List<String> items = ['2019-2020','2020-2021','2021-2022'];
+  String? selectedValueNamHoc;
+  String? selectedValueHocKi;
+   String? NamHocDay;
+  String? HocKy;
+  var hocphi1 = [];
+  var hocphi2 = [];
+  //var hocphi3 = [];
+  var tong = "0";
+  var dadong = "0";
+  var conlai = "0";
+  List<String> itemNamHoc = ['2019-2020','2020-2021','2021-2022'];
+  List<String> itemHocKy = ['1', '2', '3'];
   @override
   Widget build(BuildContext context) {
+    var hocphi = [];
+    var sv = [];
+    final rcvdData = ModalRoute.of(context)!.settings.arguments as Map;
+    sv = rcvdData['sv'];
+    
+    hocphi = rcvdData['hocphi'];
+   
+    var now = new DateTime.now();
+    var formatter = new DateFormat('dd-MM-yyyy');
+    String formattedDate = formatter.format(now);
+    
+    
    return Scaffold(
       bottomNavigationBar: BottomNavyBar(),
       body: Container(
@@ -57,8 +80,8 @@ class _HocPhiState extends State<HocPhi> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Container(
-                                      child: const Text(
-                                        "Trinh Van An",
+                                      child:  Text(
+                                        sv[0]["tensv"],
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,
@@ -69,16 +92,16 @@ class _HocPhiState extends State<HocPhi> {
                                       margin: const EdgeInsets.only(
                                           top: 10, right: 75),
                                       child: RichText(
-                                        text: const TextSpan(children: [
-                                          const TextSpan(
+                                        text:  TextSpan(children: [
+                                           TextSpan(
                                               text: "MSSV: ",
-                                              style: const TextStyle(
+                                              style:  TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 14)),
-                                          const TextSpan(
-                                              text: "1812818",
-                                              style: const TextStyle(
+                                           TextSpan(
+                                              text: sv[0]["masv"],
+                                              style:  TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 14)),
@@ -184,31 +207,43 @@ class _HocPhiState extends State<HocPhi> {
                                                   child: DropdownButtonHideUnderline(
                                                      child: DropdownButton2(
                                                           hint: Text(
-                                                            '2022-2023',
+                                                            '2021-2022',
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontWeight: FontWeight.bold,
                                                               color: Color(0xff1C2A4B)
                                                             ),
                                                           ),
-                                                          items: items
-                                                                  .map((item) =>
-                                                                  DropdownMenuItem<String>(
-                                                                    value: item,
-                                                                    child: Text(
-                                                                      item,
-                                                                      style: const TextStyle(
-                                                                        fontSize: 12,
+                                                          items: itemNamHoc
+                                                                              .map((item) =>
+                                                                    DropdownMenuItem<
+                                                                        String>(
+                                                                      value: item,
+                                                                      child: Text(
+                                                                        item,
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize: 12,
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ))
-                                                                  .toList(),
-                                                          value: selectedValue,
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              selectedValue = value as String;
-                                                            });
-                                                          },
+                                                                    ))
+                                                                .toList(),
+                                                            value: selectedValueNamHoc,
+                                                            onChanged: (value) {
+                                                              setState(() {
+                                                                selectedValueNamHoc =
+                                                                    value as String;
+                                                                NamHocDay =
+                                                                    selectedValueNamHoc;
+                                                              });
+                                                              hocphi1 = [];
+                                                              hocphi.forEach((value) {
+                                                                if (value["namhoc"] ==
+                                                                    NamHocDay) {
+                                                                  hocphi1.add(value);
+                                                                }
+                                                              });
+                                                            },
                                                           buttonHeight: 30,
                                                           buttonWidth: 110,
                                                           itemHeight: 40,
@@ -245,31 +280,47 @@ class _HocPhiState extends State<HocPhi> {
                                                   child: DropdownButtonHideUnderline(
                                                      child: DropdownButton2(
                                                           hint: Text(
-                                                            'HỌC KỲ 1',
+                                                            '2',
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontWeight: FontWeight.bold,
                                                               color: Color(0xff1C2A4B)
                                                             ),
                                                           ),
-                                                          items: items
+                                                          items: itemHocKy
                                                                   .map((item) =>
-                                                                  DropdownMenuItem<String>(
-                                                                    value: item,
-                                                                    child: Text(
-                                                                      item,
-                                                                      style: const TextStyle(
-                                                                        fontSize: 12,
-                                                                      ),
-                                                                    ),
-                                                                  ))
-                                                                  .toList(),
-                                                          value: selectedValue,
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              selectedValue = value as String;
-                                                            });
-                                                          },
+                                                        DropdownMenuItem<
+                                                            String>(
+                                                          value: item,
+                                                          child: Text(
+                                                            item,
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ))
+                                                    .toList(),
+                                                value: selectedValueHocKi,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    selectedValueHocKi =
+                                                        value as String;
+                                                    HocKy = selectedValueHocKi;
+                                                  });
+                                                  hocphi2=[];
+                                                  hocphi1.forEach((value) {
+                                                    if (value["hocky"] ==
+                                                        HocKy) {
+                                                      hocphi2.add(value);
+                                                    }
+                                                  });
+                                                  print(hocphi2);
+                                                   tong= hocphi2[0]["tong"];
+                                                   dadong= hocphi2[0]["dadong"];
+                                                   conlai= hocphi2[0]["conlai"];
+
+                                                },
                                                           buttonHeight: 30,
                                                           buttonWidth: 110,
                                                           itemHeight: 40,
@@ -293,7 +344,7 @@ class _HocPhiState extends State<HocPhi> {
                                       ),),
                                     ),
                                       Container(
-                                      child: Center(child: Text("7,800,000",
+                                      child: Center(child: Text(tong,
                                       style: TextStyle(
                                         color: Color(0xffFF7675),
                                         fontSize: 50,
@@ -305,11 +356,48 @@ class _HocPhiState extends State<HocPhi> {
                                         children: <Widget>[
                                           Container(
                                             margin: EdgeInsets.only(left: 41,top: 36),
+                                            child: Image.asset("assets/images/dadiemdanh.png"),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 22,top: 36),
+                                            child: Text("ĐÃ ĐÓNG",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xff00BFA6)
+                                            ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 22,top: 36),
+                                            child: Text(dadong,
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xff00BFA6)
+                                            ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                     Container(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Container(
+                                            margin: EdgeInsets.only(left: 41,top: 36),
                                             child: Image.asset("assets/images/vanghoc.png"),
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(left: 22,top: 36),
-                                            child: Text("CHƯA ĐÓNG",
+                                            child: Text("CÒN LẠI",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xffFF7675)
+                                            ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 22,top: 36),
+                                            child: Text(conlai,
                                             style: TextStyle(
                                               fontSize: 18,
                                               color: Color(0xffFF7675)
@@ -328,7 +416,7 @@ class _HocPhiState extends State<HocPhi> {
                                           ),
                                           Container(
                                              margin: EdgeInsets.only(left: 22,top: 36),
-                                            child: Text("10/01/2022",
+                                            child: Text(formattedDate,
                                             style: TextStyle(
                                               fontSize: 18,
                                               color: Color(0xffE4A951)

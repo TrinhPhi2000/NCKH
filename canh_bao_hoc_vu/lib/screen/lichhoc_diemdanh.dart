@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:canh_bao_hoc_vu/screen/bottomNavyBar.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,13 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
   final availableLocalesForDateFormatting = const ['vi_VN'];
     var tkb = [];
     var tkbnew = [];
+    var ngay = [];
+    
+    
   @override
   Widget build(BuildContext context) {
-   
+      
+      
         List<CardItemTKB> item2 = [];
         for (var i = 0; i < tkbnew.length; i++) {
        
@@ -57,36 +62,16 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
         diemDanh:tkbnew[i]["trangthai"],
       ));
     }
+   
 
-    //   CardItemTKB(
-    //     gio: "07:00",
-    //     monHoc: "Quản trị dự án công nghệ thông tin",
-    //     tenGV: "Đoàn Minh Khuê",
-    //     phongHoc: " Phòng A31.101",
-    //     tiet: "4/40 tiết",
-    //     diemDanh: "Vắng Học",
-    //   ),
-    //   CardItemTKB(
-    //     gio: "07:00",
-    //     monHoc: "Quản trị dự án công nghệ thông tin",
-    //     tenGV: "Đoàn Minh Khuê",
-    //     phongHoc: " Phòng A31.101",
-    //     tiet: "4/40 tiết",
-    //     diemDanh: "Vắng Học",
-    //   ),
-    //   CardItemTKB(
-    //     gio: "07:00",
-    //     monHoc: "Quản trị dự án công nghệ thông tin",
-    //     tenGV: "Đoàn Minh Khuê",
-    //     phongHoc: " Phòng A31.101",
-    //     tiet: "4/40 tiết",
-    //     diemDanh: "Vắng Học",
-    //   ),
-    // ];
     final  rcvdData = ModalRoute.of(context)!.settings.arguments as Map;
     
     tkb = rcvdData['tkb'];
-    print(tkb);
+   for (var i = 0; i < tkb.length; i++) {
+     ngay.add(tkb[i]["ngay"]);
+     
+   }
+    print(ngay);
     return Scaffold(
       bottomNavigationBar: BottomNavyBar(),
       body: SingleChildScrollView(
@@ -107,6 +92,7 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                   ),
                 ),
                 Container(
+                  
                   //margin: EdgeInsets.only(bottom: 30),
                   child: Text("LỊCH HỌC / ĐIỂM DANH",
                   style: TextStyle(
@@ -125,18 +111,28 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                    border: Border.all(color: Color(0xffE4E6E5))
                 ),
                 child: TableCalendar(
+                 
+           
+               
                 locale: 'vi_VN',
                 firstDay: DateTime.utc(2010, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
+                
                 focusedDay: focusedDay,
+                
                 calendarFormat: format,
+                
+                
                onFormatChanged: (CalendarFormat _format){
                  setState(() {
                    format = _format;
                  });
                },
+               
+              
                startingDayOfWeek: StartingDayOfWeek.monday,
                daysOfWeekVisible: true,
+               
                // Thay doi ngay
                onDaySelected: (DateTime selectDay, DateTime focusDay){
                  setState(() {
@@ -150,25 +146,37 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                  tkb.forEach((element) {
                    if(element["ngay"]==day){
                      tkbnew.add(element);
+                     
                    }
                  });
-                 //print(tkbnew);
+                
                },
                selectedDayPredicate: (DateTime date){
-                 return isSameDay(selectedDay, date);
+                 var formatter = new DateFormat('yyyy-MM-dd');
+                 String formatterDate = formatter.format(date);
+                 return ngay.contains(formatterDate);
+                 
                },
+               
+              
                // style
                calendarStyle: CalendarStyle(
                  isTodayHighlighted: true,
                  selectedDecoration: BoxDecoration(
-                   color: Colors.grey,
+                   color: Colors.red,
                    shape: BoxShape.circle,
                  ),
                  selectedTextStyle: TextStyle(color: Colors.white)
+              
+                   
+                
                ),
+               
                headerStyle: HeaderStyle(formatButtonVisible: false,titleCentered: true),
               )
+              
               ),
+              
             ),
             Container(
               height: 500,
@@ -294,15 +302,17 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                           child: Row(children: <Widget>[
                             Container(
                               margin: EdgeInsets.only(left: 22),
-                              child: Image.asset(
+                              child: item.diemDanh=="Đã Điểm Danh"?Image.asset(
                                   "assets/images/dadiemdanh.png",
+                                ):Image.asset(
+                                  "assets/images/vanghoc.png",
                                 ),
                             ),
                             Container(
                               margin: EdgeInsets.only(left: 13),
                               child: Text(item.diemDanh,
                               style: TextStyle(
-                                color: Color(0xff00BFA6),
+                                color: item.diemDanh=="Đã Điểm Danh"?Colors.green:Colors.red,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold
                               ),

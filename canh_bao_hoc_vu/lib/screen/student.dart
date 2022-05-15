@@ -107,10 +107,15 @@ class _StudentDetailsState extends State<StudentDetails> {
           });
         
   }
+  //  Future<void> sinhvien2() async{
+  //         Navigator.pushNamed(context, '/sinhvien2', arguments: { "sv":sv,
+  //         });
+        
+  // }
   Future<void> thoikhoabieu() async{
     
      var response = await http.post(
-      Uri.parse("http://quanlyhocvu.tk/api/diemdanh?mssv=1910137&="
+      Uri.parse("http://quanlyhocvu.tk/api/diemdanh?mssv=1911177&="
       ));
 
      var data = jsonDecode(response.body);
@@ -123,13 +128,40 @@ class _StudentDetailsState extends State<StudentDetails> {
    Future<void> diem() async{
     
      var response = await http.post(
-      Uri.parse("http://quanlyhocvu.tk/api/diem?mssv=1910137&="
+      Uri.parse("http://quanlyhocvu.tk/api/diem?mssv=1911177&="
       ));
 
      var data = jsonDecode(response.body);
    
      //Navigator.push(context, MaterialPageRoute(builder: (context) => LichHocDiemDanh()));
-     Navigator.pushNamed(context, '/diem',arguments: {"diem":data["diem"]});
+     Navigator.pushNamed(context, '/diem',arguments: {"diem":data["diem"],"sv":sv,});
+
+     
+  }
+   Future<void> hocphi() async{
+    
+     var response = await http.post(
+      Uri.parse("http://quanlyhocvu.tk/api/hocphi?mssv=1911177&="
+      ));
+
+     var data = jsonDecode(response.body);
+   
+     //Navigator.push(context, MaterialPageRoute(builder: (context) => LichHocDiemDanh()));
+     Navigator.pushNamed(context, '/hocphi',arguments: {"hocphi":data["hocphi"],"sv":sv,});
+
+     
+  }
+  Future<void> gvcn() async{
+    
+     var response = await http.post(
+      Uri.parse("http://quanlyhocvu.tk/api/gvcn?mssv=1911177&="
+      ));
+
+     var data = jsonDecode(response.body);
+     var gvcn = data["gvcn"];
+      
+ 
+     Navigator.pushNamed(context, '/gvcn',arguments: {"gvcn":gvcn});
 
      
   }
@@ -352,7 +384,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                                         ),
                                         GestureDetector(
                                           onTap: (){
-                                            //thoikhoabieu();
+                                            //sinhvien2();
                                             diem();
                                           //Navigator.push(context, MaterialPageRoute(builder: (context) => DiemThi()));
                                           },
@@ -382,7 +414,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                                         ),
                                         GestureDetector(
                                            onTap: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HocPhi()));
+                                          hocphi();
                                           },
                                           child: Container(
                                           
@@ -410,7 +442,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                                         ),
                                         GestureDetector(
                                            onTap: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => GVCN()));
+                                             gvcn();
                                           },
                                           child: Container(
                                           
