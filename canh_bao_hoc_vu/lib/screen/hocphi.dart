@@ -15,11 +15,11 @@ class HocPhi extends StatefulWidget {
 class _HocPhiState extends State<HocPhi> {
   String? selectedValueNamHoc;
   String? selectedValueHocKi;
-   String? NamHocDay;
+  String? NamHocDay;
   String? HocKy;
   var hocphi1 = [];
   var hocphi2 = [];
-  //var hocphi3 = [];
+
   var tong = "0";
   var dadong = "0";
   var conlai = "0";
@@ -31,9 +31,9 @@ class _HocPhiState extends State<HocPhi> {
     var sv = [];
     final rcvdData = ModalRoute.of(context)!.settings.arguments as Map;
     sv = rcvdData['sv'];
-    
+
     hocphi = rcvdData['hocphi'];
-   
+
     var now = new DateTime.now();
     var formatter = new DateFormat('dd-MM-yyyy');
     String formattedDate = formatter.format(now);

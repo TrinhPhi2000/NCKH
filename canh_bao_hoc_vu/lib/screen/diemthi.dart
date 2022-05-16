@@ -59,7 +59,14 @@ class _DiemThiState extends State<DiemThi> {
           )),
           DataCell(Text(element["Diemtk"])),
           DataCell(Text(element["diemquydoi"])),
-          DataCell(Text('Đạt')),
+          DataCell(Container(
+                              margin: EdgeInsets.only(left: 22),
+                              child: element["TrangThai"]=="Đạt"?Image.asset(
+                                  "assets/images/dadiemdanh.png",
+                                ):Image.asset(
+                                  "assets/images/vanghoc.png",
+                                ),
+                            ),),
          
         ],
       ),

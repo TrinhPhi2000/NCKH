@@ -52,9 +52,6 @@ class _HomePageState extends State<HomePage> {
     sodt = rcvdData['sodt'];
     diachi = rcvdData['diachi'];
     sv = rcvdData['sv'];
-    print(sv);
-    // tensv = rcvdData['tensv'];
-    // masv = rcvdData['masv'];
 
     List<CardItemStudent> item2 = [];
 
@@ -70,27 +67,7 @@ class _HomePageState extends State<HomePage> {
       ));
     }
 
-  //   List<CardItemStudent> item2 =[ 
-  //   CardItemStudent(
-  //     urlImage: "assets/images/student.png",
-  //     name:"TRINH PHI",
-  //     textMSSV: "MSSV:",
-  //     textMSSV1: " 1812779",
-  //     textPoint: "3.7",
-  //     textPoint1: "/4",
-  //     textGPA: "GPA"
-  //   ),
-  //   CardItemStudent(
-  //     urlImage: "assets/images/student2.png",
-  //     name: "LÊ THỊ THANH HUYỀN",
-  //     textMSSV: "MSSV:",
-  //     textMSSV1: " 1812779",
-  //     textPoint: "2.5",
-  //     textPoint1: "/4",
-  //     textGPA: "GPA"
-  //   ),
-  // ];
-
+  
   
     return Scaffold(
       bottomNavigationBar: BottomNavyBar(),

@@ -71,7 +71,7 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
      ngay.add(tkb[i]["ngay"]);
      
    }
-    print(ngay);
+    
     return Scaffold(
       bottomNavigationBar: BottomNavyBar(),
       body: SingleChildScrollView(
@@ -111,7 +111,7 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                    border: Border.all(color: Color(0xffE4E6E5))
                 ),
                 child: TableCalendar(
-                 
+                  
            
                
                 locale: 'vi_VN',
@@ -163,8 +163,8 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                calendarStyle: CalendarStyle(
                  isTodayHighlighted: true,
                  selectedDecoration: BoxDecoration(
-                   color: Colors.red,
-                   shape: BoxShape.circle,
+                   color: Color(0xffFAB1A0),
+                   borderRadius: BorderRadius.circular(10.0),
                  ),
                  selectedTextStyle: TextStyle(color: Colors.white)
               
@@ -312,7 +312,7 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                               margin: EdgeInsets.only(left: 13),
                               child: Text(item.diemDanh,
                               style: TextStyle(
-                                color: item.diemDanh=="Đã Điểm Danh"?Colors.green:Colors.red,
+                                color: item.diemDanh=="Đã Điểm Danh"?Color(0xff00BFA6):Colors.red,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold
                               ),

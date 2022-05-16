@@ -7,6 +7,7 @@ import 'package:canh_bao_hoc_vu/screen/hocphi.dart';
 import 'package:canh_bao_hoc_vu/screen/lichhoc_diemdanh.dart';
 import 'package:canh_bao_hoc_vu/screen/reset_password.dart';
 import 'package:canh_bao_hoc_vu/screen/student_detail.dart';
+import 'package:canh_bao_hoc_vu/screen/thongkediemdanh.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/diem':(context) => DiemThi(),
         '/hocphi':(context) =>HocPhi(),
         '/gvcn':(context) => GVCN(),
+        '/tkdd':(context) => ThongKeDiemDanh(),
          
       },
       debugShowCheckedModeBanner: false,
@@ -252,19 +254,15 @@ class _LoginPageState extends State<LoginPage> {
     if(passController.text.isNotEmpty && sdtController.text.isNotEmpty){
      
       try {
-        var response = await http.post(
-      Uri.parse("http://quanlyhocvu.tk/api/login?sdt="
-       + sdtController.text + "&password=" + passController.text));
-     var data = jsonDecode(response.body);
-     var pa = data["phuhuynh"];
-     var sv = data["sinhvien"];
-     var isLogin = false;
-     
-          Navigator.pushNamed(context, '/homepage', arguments: {"name":pa['tenph'], 
-          "sodt":pa['sodt'], "diachi":pa['diachi'], "sv": sv});
-         
-          //Navigator.pushNamed(context, 'home/sinhvien',arguments: {"tensv":sv['tensv'],"masv":sv['masv']});
-         print("Dang nhap thanh cong!");
+            var response = await http.post(
+          Uri.parse("http://quanlyhocvu.tk/api/login?sdt="
+          + sdtController.text + "&password=" + passController.text));
+        var data = jsonDecode(response.body);
+        var pa = data["phuhuynh"];
+        var sv = data["sinhvien"];
+        
+              Navigator.pushNamed(context, '/homepage', arguments: {"name":pa['tenph'], 
+              "sodt":pa['sodt'], "diachi":pa['diachi'], "sv": sv});
       } on Exception catch (_) {
             ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content:  Text("Sai tài khoản hoặc mật khẩu !!"),backgroundColor: Colors.red,));
@@ -274,23 +272,5 @@ class _LoginPageState extends State<LoginPage> {
     
       
       
-        
-    //  var response1 = await http.get(Uri.parse("https://db8e-13-72-106-213.ngrok.io/api/sinhvien"));
-    //  var data1 = jsonDecode(response1.body);
-    //  var sv = data1.map((entry) => (entry)).toList();
-    //  var tensv = "";
-    //  var masv = "";
-    //  for(var sv1 in sv){
-    //    if(sv1['maph1'] == pa['sodt']){
-    //      Navigator.pushNamed(context, 'homepage', arguments: { "tensv":sv1['tensv'], "masv":sv1['masv']});
-    //    }
-    //  }
-     
-    //  if(!isLogin){
-    //       print("Thông tin sai!!");
-    //       ScaffoldMessenger.of(context)
-    //        .showSnackBar(SnackBar(content:  Text("Sai tài khoản hoặc mật khẩu !!")));
-    //     }
-    //  }
      }
   }
