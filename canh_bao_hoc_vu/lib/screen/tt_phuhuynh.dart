@@ -4,7 +4,7 @@ import 'package:canh_bao_hoc_vu/screen/bottomNavyBar.dart';
 import 'package:flutter/material.dart';
 
 import 'bottomNavyBar.dart';
-import 'home_page.dart';
+// import 'home_page.dart';
 
 
 class PhuHuynh extends StatefulWidget {
@@ -36,20 +36,24 @@ class _PhuHuynhState extends State<PhuHuynh> {
                     child: Container(
                       child: Row(
                         children: <Widget>[
-                          Container(
+                            Container(
                             margin: EdgeInsets.only(
-                                left: 20,
-                                top: 71,
+                                left: 35,
+                                top: 35,
+                                right: 20
                             ),
-                            child:  ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: InkWell(
-                                  child: Image.asset('assets/images/father.png',
-                                fit: BoxFit.cover,
-                              )
-                              )
                             
+                            child:  ClipRRect(
                               
+                              // borderRadius: BorderRadius.circular(20),
+                              child: InkWell(                                
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
+                                fit: BoxFit.cover,
+                                color: Colors.white,
+                              ),
+                           
+                              )
                             ),
                            
                           ),

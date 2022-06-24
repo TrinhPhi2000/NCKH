@@ -38,6 +38,10 @@ class _ThongKeDiemDanhState extends State<ThongKeDiemDanh> {
   String? HocKy;
   var tkdd1 = [];
   var tkdd2 = [];
+  var  tongDiHoc = 0;
+  var  tongBuoi = 0;
+  var tiLeDiHoc = '0';
+  
   List<String> itemNamHoc = ['2019-2020', '2020-2021', '2021-2022'];
 
   List<String> itemHocKy = ['1', '2', '3'];
@@ -63,6 +67,8 @@ class _ThongKeDiemDanhState extends State<ThongKeDiemDanh> {
         tiLeP: tkdd2[i]["tylep"],
       ));
     }
+    
+  
    
    
     return Scaffold(
@@ -232,7 +238,17 @@ class _ThongKeDiemDanhState extends State<ThongKeDiemDanh> {
                                                   });
                                                    
                                                  print(tkdd2);
+                                                var sum = 0;
+                                                var soBuoiHoc = 0;
+                                                for(var i = 0; i < tkdd2.length; ++i) {
+                                                  sum = sum + int.parse(tkdd2[i]["tongbuoi"]);
+                                                  soBuoiHoc = soBuoiHoc + int.parse(tkdd2[i]["tyledihoc"]);
+                                                }
+                                                  tongDiHoc = soBuoiHoc;
+                                                  tongBuoi = sum;
+                                                
                                                 },
+                                                
                                                 buttonHeight: 30,
                                                 buttonWidth: 110,
                                                 itemHeight: 40,
@@ -250,14 +266,15 @@ class _ThongKeDiemDanhState extends State<ThongKeDiemDanh> {
                                 child: CircularPercentIndicator(
                                   radius: 180,
                                   lineWidth: 20.0,
-                                  percent: 60/100,
+                                  percent: tongDiHoc/tongBuoi ,
                                   animation: true,
                                   animationDuration: 1200,
-                                  center:  Text("60%",  style:
-                                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 36.0),),
-                                  progressColor: Color(0xff40B78C),
+                                  //==0?1:tongBuoi
+                                  center:  Text("${((tongDiHoc/tongBuoi)*100).toStringAsFixed(2)}  %",  style:
+                                          new TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),),
+                                  progressColor: tongDiHoc/tongBuoi<0.5?Color(0xffFF7675):Color(0xff40B78C),
                                    footer: new Text(
-                                      "Đã học 13/15 buổi",
+                                      "Đã học ${tongDiHoc.toString()} / ${tongBuoi.toString()} buổi",
                                       style:
                                           new TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
                                     ),
@@ -318,25 +335,30 @@ Widget buildCardTKB({
               child: Row(
                 children: <Widget>[
                    Container(
-              child: Text("Tỷ lệ đi học: "),
+              child: Text("Đi học: ",style: TextStyle(
+                            
+                            fontSize: 14,
+                          ),),
             ),
             Container(
+              margin: EdgeInsets.only(left: 10),
               child: RichText(                 
                     text: TextSpan(children: [
                       TextSpan(
                           text: item.diHoc,
                           style: TextStyle(
-                             
+                            fontSize: 14,
+                              color: Colors.orange,
                               fontWeight: FontWeight.bold)),
                       TextSpan(
                           text: "/",
                           style: TextStyle(
-                             
+                             fontSize: 14,
                               fontWeight: FontWeight.bold)),        
                       TextSpan(
                           text: item.tongBuoi+ " buổi",
                           style: TextStyle(
-                            
+                            fontSize: 14,
                               fontWeight: FontWeight.bold)),
                     ]),
                   ),
@@ -348,13 +370,14 @@ Widget buildCardTKB({
                 Container(
                     child:  new LinearPercentIndicator(
                     animation: true,
-               
-                    animationDuration: 1200,
-                    width: 100.0,
-                    lineHeight: 16.0,
+              
+                    animationDuration: 1000,
+                    width: 120.0,
+                    lineHeight: 18.0,
                     center: Text(item.tiLe),
-                    percent: 0.7,
-                    progressColor: Colors.blue,
+                    percent: double.parse(item.tiLeP),
+                    progressColor: double.parse(item.tiLeP)<0.5?Color(0xffFF7675):Color(0xff40B78C),
+                    
                   ),
       )
           ],

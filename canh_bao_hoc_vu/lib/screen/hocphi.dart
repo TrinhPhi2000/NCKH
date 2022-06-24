@@ -3,7 +3,7 @@
 import 'package:canh_bao_hoc_vu/screen/bottomNavyBar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 class HocPhi extends StatefulWidget {
   const HocPhi({ Key? key }) : super(key: key);
@@ -62,17 +62,28 @@ class _HocPhiState extends State<HocPhi> {
                           child: Row(
                             children: <Widget>[
                               Container(
-                                  margin: const EdgeInsets.only(bottom: 20),
-                                  width: 70,
-                                  height: 70,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/student.png",
-                                      fit: BoxFit.cover,
-                                      width: 70,
-                                      height: 70,
-                                    ),
-                                  )),
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 10
+                                // left: 35,
+                                // top: 35,
+                                // right: 20
+                            ),
+
+                            child:  ClipRRect(
+                              
+                              // borderRadius: BorderRadius.circular(20),
+                              child: InkWell(                                
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
+                                fit: BoxFit.cover,
+                                color: Colors.white,
+                              ),
+                              
+                              )
+                            ),
+                           
+                          ),
                               Container(
                                 margin:
                                     const EdgeInsets.only(top: 20, left: 18),
@@ -111,49 +122,49 @@ class _HocPhiState extends State<HocPhi> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                margin:
-                                    const EdgeInsets.only(top: 22, left: 30),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: RichText(
-                                        text: const TextSpan(children: [
-                                          TextSpan(
-                                              text: "3.7",
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                          const TextSpan(
-                                              text: "/4",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                        ]),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 10),
-                                      height: 15,
-                                      width: 40,
-                                      child: const Text(
-                                        "GPA",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 11),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            const Radius.circular(20)),
-                                        color: const Color.fromRGBO(
-                                            28, 42, 75, 100),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
+                              // Container(
+                              //   margin:
+                              //       const EdgeInsets.only(top: 22, left: 30),
+                              //   child: Column(
+                              //     children: <Widget>[
+                              //       Container(
+                              //         child: RichText(
+                              //           text: const TextSpan(children: [
+                              //             TextSpan(
+                              //                 text: "3.7",
+                              //                 style: const TextStyle(
+                              //                     color: Colors.white,
+                              //                     fontWeight: FontWeight.bold)),
+                              //             const TextSpan(
+                              //                 text: "/4",
+                              //                 style: TextStyle(
+                              //                     color: Colors.white,
+                              //                     fontWeight: FontWeight.bold)),
+                              //           ]),
+                              //         ),
+                              //       ),
+                              //       Container(
+                              //         margin: const EdgeInsets.only(top: 10),
+                              //         height: 15,
+                              //         width: 40,
+                              //         child: const Text(
+                              //           "GPA",
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold,
+                              //               color: Colors.white,
+                              //               fontSize: 11),
+                              //           textAlign: TextAlign.center,
+                              //         ),
+                              //         decoration: const BoxDecoration(
+                              //           borderRadius: const BorderRadius.all(
+                              //               const Radius.circular(20)),
+                              //           color: const Color.fromRGBO(
+                              //               28, 42, 75, 100),
+                              //         ),
+                              //       )
+                              //     ],
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

@@ -63,14 +63,21 @@ class _StudentDetailsState extends State<StudentDetails> {
        
       Uri.parse("http://quanlyhocvu.tk/api/diem?mssv=$mssv&="
       ));
+      
+     var response1 = await http.post(
+       
+      Uri.parse("http://quanlyhocvu.tk/api/diemrenluyen?mssv=$mssv&="
+      ));
 
      var data = jsonDecode(response.body);
+     var data1 = jsonDecode(response1.body);
    
      
-     Navigator.pushNamed(context, '/diem',arguments: {"diem":data["diem"],"sv":sv,});
+     Navigator.pushNamed(context, '/diem',arguments: {"diem":data["diem"],"sv":sv,"diemrenluyen": data1["diemrenluyen"] });
 
      
   }
+ 
    Future<void> hocphi() async{
     var mssv = sv[0]["masv"];
     print(mssv);
@@ -140,21 +147,28 @@ class _StudentDetailsState extends State<StudentDetails> {
                           child: Row(
                             children: <Widget>[
                               Container(
-                                margin: EdgeInsets.only(
-                                  bottom: 20
-                                ),
-                                width: 70,
-                                height: 70,
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 10
+                                // left: 35,
+                                // top: 35,
+                                // right: 20
+                            ),
 
-                                    child: ClipOval(
-                                  child: Image.asset(
-                                    "assets/images/student.png",
-                                    fit: BoxFit.cover,
-                                    width: 70,
-                                    height: 70,
-                                  ),
-                                )
+                            child:  ClipRRect(
+                              
+                              // borderRadius: BorderRadius.circular(20),
+                              child: InkWell(                                
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
+                                fit: BoxFit.cover,
+                                color: Colors.white,
                               ),
+                              
+                              )
+                            ),
+                           
+                          ),
                               Container(
                                 margin: EdgeInsets.only(
                                   top: 20,
@@ -181,7 +195,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                                       child: RichText(
                                         text: TextSpan(children: [
                                           TextSpan(
-                                              text: "MSSV:",
+                                              text: "MSSV: ",
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
@@ -198,52 +212,52 @@ class _StudentDetailsState extends State<StudentDetails> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(
-                                  top: 22,
-                                  left: 30
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: RichText(
-                                        text: TextSpan(children: [
-                                          TextSpan(
-                                              text: "3.7",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                          TextSpan(
-                                              text: "/4",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                        ]),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        top: 10
-                                      ),
-                                      height: 15,
-                                      width: 40,
-                                      child: Text(
-                                        "GPA",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 11),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        color: Color.fromRGBO(28, 42, 75, 100),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
+                              // Container(
+                              //   margin: EdgeInsets.only(
+                              //     top: 22,
+                              //     left: 30
+                              //   ),
+                              //   child: Column(
+                              //     children: <Widget>[
+                              //       Container(
+                              //         child: RichText(
+                              //           text: TextSpan(children: [
+                              //             TextSpan(
+                              //                 text: "3.7",
+                              //                 style: TextStyle(
+                              //                     color: Colors.white,
+                              //                     fontWeight: FontWeight.bold)),
+                              //             TextSpan(
+                              //                 text: "/4",
+                              //                 style: TextStyle(
+                              //                     color: Colors.white,
+                              //                     fontWeight: FontWeight.bold)),
+                              //           ]),
+                              //         ),
+                              //       ),
+                              //       Container(
+                              //         margin: EdgeInsets.only(
+                              //           top: 10
+                              //         ),
+                              //         height: 15,
+                              //         width: 40,
+                              //         child: Text(
+                              //           "GPA",
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold,
+                              //               color: Colors.white,
+                              //               fontSize: 11),
+                              //           textAlign: TextAlign.center,
+                              //         ),
+                              //         decoration: BoxDecoration(
+                              //           borderRadius: BorderRadius.all(
+                              //               Radius.circular(20)),
+                              //           color: Color.fromRGBO(28, 42, 75, 100),
+                              //         ),
+                              //       )
+                              //     ],
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
@@ -329,6 +343,36 @@ class _StudentDetailsState extends State<StudentDetails> {
                                           ),
                                         ),
                                         GestureDetector(
+                                        onTap: (){
+                                          
+                                          tkdd();
+                                        },
+                                        child: Container(
+                                         
+                                          margin: EdgeInsets.all(15),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(15),
+                                            color: Color.fromRGBO(218, 222, 234, 100),
+                                          ),
+                                          child: Column(children: [
+                                            Container(
+                                              margin: EdgeInsets.all(20),
+                                              child: Image.asset("assets/images/lich.png",width: 30,height: 30,fit: BoxFit.cover,)),
+                                            Container(
+                                              margin: EdgeInsets.only(left: 30,right: 10),
+                                              child: Text("THÔNG KÊ ĐIỂM DANH",
+                                              style: TextStyle(
+                                              color: Color(0xffb40284a),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15,
+                                              
+                                              ),
+                                              ),
+                                            )
+                                          ],),
+                                          ),
+                                      ),
+                                        GestureDetector(
                                           onTap: (){
                                             //sinhvien2();
                                             diem();
@@ -400,7 +444,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                                           child: Column(children: [
                                             Container(
                                               margin: EdgeInsets.all(20),
-                                              child: Image.asset("assets/images/thongtinsinhvien.png",width: 30,height: 30,fit: BoxFit.cover,color: Colors.orange,)),
+                                              child: Image.asset("assets/images/thongtinsinhvien.png",width: 30,height: 30,fit: BoxFit.cover,color: Color(0XFF74A2FC),)),
                                             Container(
                                               child: Text("THÔNG TIN GVCN",
                                               style: TextStyle(
@@ -414,35 +458,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                                           ],),
                                           ),
                                         ),
-                                       GestureDetector(
-                                           onTap: (){
-                                             tkdd();
-                                             //Navigator.push(context, MaterialPageRoute(builder: (context) => ThongKeDiemDanh()));
-                                          },
-                                          child: Container(
-                                         
-                                          margin: EdgeInsets.all(15),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(15),
-                                            color: Color.fromRGBO(218, 222, 234, 100),
-                                          ),
-                                          child: Column(children: [
-                                            Container(
-                                              margin: EdgeInsets.all(20),
-                                              child: Image.asset("assets/images/thongtinsinhvien.png",width: 30,height: 30,fit: BoxFit.cover,color: Colors.orange,)),
-                                            Container(
-                                              child: Text("THỐNG KÊ DIỂM DANH",
-                                              style: TextStyle(
-                                              color: Color(0xffb40284a),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
-                                              
-                                              ),
-                                              ),
-                                            )
-                                          ],),
-                                          ),
-                                        ),
+                                       
 
                                     ],
                                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

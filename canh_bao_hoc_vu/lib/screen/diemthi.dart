@@ -3,7 +3,7 @@
 import 'package:canh_bao_hoc_vu/screen/bottomNavyBar.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dialog/dialog.dart';
+// import 'package:dialog/dialog.dart';
 
 class CardItemDiem {
   final String namhoc;
@@ -37,6 +37,11 @@ class _DiemThiState extends State<DiemThi> {
   String? HocKy;
   var diem1 = [];
   var diem2 = [];
+  var diemHe10 = '0';
+  var tongTinChi = 0;
+  var diemHe4 = '0';
+  var diemRenLuyen = 0;
+  var xepLoai = '';
   List<String> itemNamHoc = ['2019-2020', '2020-2021', '2021-2022'];
 
   List<String> itemHocKy = ['1', '2', '3'];
@@ -44,11 +49,14 @@ class _DiemThiState extends State<DiemThi> {
   Widget build(BuildContext context) {
     var diem = [];
     var sv = [];
+    var diemrenluyen = [];
     final rcvdData = ModalRoute.of(context)!.settings.arguments as Map;
     sv = rcvdData['sv'];
-   
+    
     diem = rcvdData['diem'];
     List<DataRow> arr = [];
+    diemrenluyen = rcvdData['diemrenluyen'];
+
     diem2.forEach((element) {
       arr.add(
       DataRow(
@@ -72,7 +80,8 @@ class _DiemThiState extends State<DiemThi> {
       ),
     );
     });
-    
+   
+  
 
     return Scaffold(
       bottomNavigationBar: const BottomNavyBar(),
@@ -95,18 +104,29 @@ class _DiemThiState extends State<DiemThi> {
                           margin: const EdgeInsets.only(top: 89, right: 30),
                           child: Row(
                             children: <Widget>[
-                              Container(
-                                  margin: const EdgeInsets.only(bottom: 20),
-                                  width: 70,
-                                  height: 70,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      "assets/images/student.png",
-                                      fit: BoxFit.cover,
-                                      width: 70,
-                                      height: 70,
-                                    ),
-                                  )),
+                            Container(
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 10
+                                // left: 35,
+                                // top: 35,
+                                // right: 20
+                            ),
+
+                            child:  ClipRRect(
+                              
+                              // borderRadius: BorderRadius.circular(20),
+                              child: InkWell(                                
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
+                                fit: BoxFit.cover,
+                                color: Colors.white,
+                              ),
+                              
+                              )
+                            ),
+                           
+                          ),
                               Container(
                                 margin:
                                     const EdgeInsets.only(top: 20, left: 18),
@@ -145,49 +165,49 @@ class _DiemThiState extends State<DiemThi> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                margin:
-                                    const EdgeInsets.only(top: 22, left: 30),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: RichText(
-                                        text: const TextSpan(children: [
-                                          TextSpan(
-                                              text: "3.7",
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                          const TextSpan(
-                                              text: "/4",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                        ]),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 10),
-                                      height: 15,
-                                      width: 40,
-                                      child: const Text(
-                                        "GPA",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 11),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            const Radius.circular(20)),
-                                        color: const Color.fromRGBO(
-                                            28, 42, 75, 100),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
+                        //       Container(
+                        //         margin:
+                        //             const EdgeInsets.only(top: 22, left: 30),
+                        //         child: Column(
+                        //           children: <Widget>[
+                        //             Container(
+                        //               child: RichText(
+                        //                 text: const TextSpan(children: [
+                        //                   TextSpan(
+                        //                       text: "3.7",
+                        //                       style: const TextStyle(
+                        //                           color: Colors.white,
+                        //                           fontWeight: FontWeight.bold)),
+                        //                   const TextSpan(
+                        //                       text: "/4",
+                        //                       style: TextStyle(
+                        //                           color: Colors.white,
+                        //                           fontWeight: FontWeight.bold)),
+                        //                 ]),
+                        //               ),
+                        //             ),
+                        //             Container(
+                        //               margin: const EdgeInsets.only(top: 10),
+                        //               height: 15,
+                        //               width: 40,
+                        //               child: const Text(
+                        //                 "GPA",
+                        //                 style: TextStyle(
+                        //                     fontWeight: FontWeight.bold,
+                        //                     color: Colors.white,
+                        //                     fontSize: 11),
+                        //                 textAlign: TextAlign.center,
+                        //               ),
+                        //               decoration: const BoxDecoration(
+                        //                 borderRadius: const BorderRadius.all(
+                        //                     const Radius.circular(20)),
+                        //                 color: const Color.fromRGBO(
+                        //                     28, 42, 75, 100),
+                        //               ),
+                        //             )
+                        //           ],
+                        //         ),
+                        //       )
                             ],
                           ),
                         ),
@@ -342,8 +362,21 @@ class _DiemThiState extends State<DiemThi> {
                                                       diem2.add(value);
                                                     }
                                                   });
-
-                                                  print(diem2);
+                                                   var _diemHe10 = 0.0;
+                                                    var _diemHe4 = 0.0;
+                                                    for(var i = 0; i< diem2.length; i++) {
+                                                      _diemHe10 = _diemHe10 + double.parse(diem2[i]["Diemtk"])*int.parse(diem2[i]["stc"]);
+                                                      tongTinChi = tongTinChi + int.parse(diem2[i]["stc"]);
+                                                      _diemHe4 = _diemHe4 + double.parse(diem2[i]["diemtkhe4"])*int.parse(diem2[i]["stc"]);
+                                                    }
+                                                    _diemHe10 = _diemHe10/tongTinChi;
+                                                    _diemHe4 = _diemHe4/tongTinChi;
+                                                    diemHe10 = _diemHe10.toStringAsFixed(2);
+                                                    diemHe4 = _diemHe4.toStringAsFixed(2);
+                                                  diemRenLuyen = int.parse(diemrenluyen[0]['diem']);
+                                                  xepLoai = diemrenluyen[0]['xeploai'];
+                                                  
+                                                
                                                 },
                                                 buttonHeight: 30,
                                                 buttonWidth: 110,
@@ -446,7 +479,7 @@ class _DiemThiState extends State<DiemThi> {
                                             Container(
                                               margin: EdgeInsets.only(top: 10),
                                               child: Text(
-                                                "7.39",
+                                                diemHe10,
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
@@ -481,7 +514,7 @@ class _DiemThiState extends State<DiemThi> {
                                             Container(
                                               margin: EdgeInsets.only(top: 10),
                                               child: Text(
-                                                "2.19",
+                                                diemHe4,
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
@@ -516,7 +549,7 @@ class _DiemThiState extends State<DiemThi> {
                                             Container(
                                               margin: EdgeInsets.only(top: 10),
                                               child: Text(
-                                                "80",
+                                                diemRenLuyen.toString(),
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
@@ -551,7 +584,7 @@ class _DiemThiState extends State<DiemThi> {
                                             Container(
                                               margin: EdgeInsets.only(top: 10),
                                               child: Text(
-                                                "Tốt",
+                                               xepLoai,
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:

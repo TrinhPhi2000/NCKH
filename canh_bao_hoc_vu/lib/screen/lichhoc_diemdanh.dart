@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:convert';
-import 'dart:html';
+// import 'dart:convert';
+// import 'dart:html';
 
 import 'package:canh_bao_hoc_vu/screen/bottomNavyBar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 
 class CardItemTKB{
   final String gio;
@@ -61,6 +61,7 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
         tiet: tkbnew[i]["dahoc"],
         diemDanh:tkbnew[i]["trangthai"],
       ));
+      
     }
    
 
@@ -71,6 +72,28 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
      ngay.add(tkb[i]["ngay"]);
      
    }
+   Color getColor (String color) {
+   var _color = Colors.white;  
+   switch(color) {
+      case "red": { 
+         _color = Colors.red;
+      } 
+      break; 
+  
+      case "blue": { 
+         _color = Colors.blue; 
+      } 
+      break; 
+      
+      default: { 
+         _color = Colors.yellow;  
+      }
+      break; 
+   } 
+   return _color;
+}
+    
+    
     
     return Scaffold(
       bottomNavigationBar: BottomNavyBar(),
@@ -103,80 +126,77 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                 )
               ],)
             ),
-            SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(15),
-                   border: Border.all(color: Color(0xffE4E6E5))
-                ),
-                child: TableCalendar(
-                  
-           
-               
-                locale: 'vi_VN',
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 3, 14),
-                
-                focusedDay: focusedDay,
-                
-                calendarFormat: format,
-                
-                
-               onFormatChanged: (CalendarFormat _format){
-                 setState(() {
-                   format = _format;
-                 });
-               },
-               
-              
-               startingDayOfWeek: StartingDayOfWeek.monday,
-               daysOfWeekVisible: true,
-               
-               // Thay doi ngay
-               onDaySelected: (DateTime selectDay, DateTime focusDay){
-                 setState(() {
-                   selectedDay = selectDay;
-                   focusedDay = focusDay;
-                 });
-                 //print(selectedDay);
-                 var day = focusedDay.toString().split(" ")[0];
-                 tkbnew.clear();
-                 //print(day);
-                 tkb.forEach((element) {
-                   if(element["ngay"]==day){
-                     tkbnew.add(element);
-                     
-                   }
-                 });
-                
-               },
-               selectedDayPredicate: (DateTime date){
-                 var formatter = new DateFormat('yyyy-MM-dd');
-                 String formatterDate = formatter.format(date);
-                 return ngay.contains(formatterDate);
-                 
-               },
-               
-              
-               // style
-               calendarStyle: CalendarStyle(
-                 isTodayHighlighted: true,
-                 selectedDecoration: BoxDecoration(
-                   color: Color(0xffFAB1A0),
-                   borderRadius: BorderRadius.circular(10.0),
-                 ),
-                 selectedTextStyle: TextStyle(color: Colors.white)
-              
-                   
-                
-               ),
-               
-               headerStyle: HeaderStyle(formatButtonVisible: false,titleCentered: true),
-              )
-              
+            Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                 borderRadius: BorderRadius.circular(15),
+                 border: Border.all(color: Color(0xffE4E6E5))
               ),
+              child: TableCalendar(
+                
+           
+             
+              locale: 'vi_VN',
+              firstDay: DateTime.utc(2010, 10, 16),
+              lastDay: DateTime.utc(2030, 3, 14),
               
+              focusedDay: focusedDay,
+              
+              calendarFormat: format,
+              
+              
+             onFormatChanged: (CalendarFormat _format){
+               setState(() {
+                 format = _format;
+               });
+             },
+             
+            
+             startingDayOfWeek: StartingDayOfWeek.monday,
+             daysOfWeekVisible: true,
+             
+             // Thay doi ngay
+             onDaySelected: (DateTime selectDay, DateTime focusDay){
+               setState(() {
+                 selectedDay = selectDay;
+                 focusedDay = focusDay;
+               });
+               //print(selectedDay);
+               var day = focusedDay.toString().split(" ")[0];
+               tkbnew.clear();
+               //print(day);
+               tkb.forEach((element) {
+                 if(element["ngay"]==day){
+                   tkbnew.add(element);
+                   
+                 }
+               });
+              
+             },
+             selectedDayPredicate: (DateTime date){
+               var formatter = new DateFormat('yyyy-MM-dd');
+               String formatterDate = formatter.format(date);
+               return ngay.contains(formatterDate);
+               
+             },
+             
+            
+             // style
+             calendarStyle: CalendarStyle(
+               isTodayHighlighted: true,
+               selectedDecoration: BoxDecoration(
+                 color: Color(0xffFAB1A0),
+                 borderRadius: BorderRadius.circular(10.0),
+               ),
+               selectedTextStyle: TextStyle(color: Colors.white)
+            
+                 
+              
+             ),
+             
+             headerStyle: HeaderStyle(formatButtonVisible: false,titleCentered: true),
+            )
+            
             ),
             Container(
               height: 500,
@@ -302,17 +322,18 @@ class _LichHocDiemDanhState extends State<LichHocDiemDanh> {
                           child: Row(children: <Widget>[
                             Container(
                               margin: EdgeInsets.only(left: 22),
-                              child: item.diemDanh=="Đã Điểm Danh"?Image.asset(
-                                  "assets/images/dadiemdanh.png",
-                                ):Image.asset(
+                              child: item.diemDanh=="Vắng Học"?Image.asset(
                                   "assets/images/vanghoc.png",
+                                ):Image.asset(
+                                  "assets/images/dadiemdanh.png",
                                 ),
                             ),
                             Container(
                               margin: EdgeInsets.only(left: 13),
                               child: Text(item.diemDanh,
                               style: TextStyle(
-                                color: item.diemDanh=="Đã Điểm Danh"?Color(0xff00BFA6):Colors.red,
+                                color: item.diemDanh=="Đã Điểm Danh"?Color(0xff00BFA6): item.diemDanh=="Chưa nhập điểm danh"? Colors.amber: Colors.red,
+                                //color: item.diemDanh=="Đã Điểm Danh"?Color(0xff00BFA6):Colors.red,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold
                               ),

@@ -1,12 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, library_prefixes
-import 'tt_phuhuynh.dart';
+// import 'tt_phuhuynh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'bottomNavyBar.dart';
-import 'student.dart';
-import 'dart:developer';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+// import 'student.dart';
+// import 'dart:developer';
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 // import 'package:canh_bao_hoc_vu/model/model_phuhuynh.dart';
 class CardItemStudent{
   final String urlImage;
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
 
     for (var i = 0; i < sv.length; i++) {
       item2.add(CardItemStudent(
-        urlImage: "assets/images/student.png",
+        urlImage: "assets/images/thongtinsinhvien.png",
         name: sv[i]["tensv"],
         textMSSV: "MSSV: ",
         textMSSV1: sv[i]["masv"],
@@ -85,15 +85,19 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(
-                                left: 20,
-                                top: 71,
+                                left: 35,
+                                top: 35,
+                                right: 20
                             ),
                             
                             child:  ClipRRect(
-                               borderRadius: BorderRadius.circular(20),
+                              
+                              // borderRadius: BorderRadius.circular(20),
                               child: InkWell(                                
-                                  child: Image.asset('assets/images/father.png',
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
                                 fit: BoxFit.cover,
+                                color: Colors.white,
                               ),
                               onTap:() {
                                 
@@ -216,18 +220,15 @@ Widget buildCardStudent({
    child: Row(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(left: 22),
-            width: 60,
-            height: 60,
-                child: ClipOval(
+              margin: EdgeInsets.all(10),
               child: Image.asset(
-                item.urlImage,
+                "assets/images/thongtinsinhvien.png",
+                width: 38 ,
+                height: 38,
                 fit: BoxFit.cover,
-                width: 70,
-                height: 70,
-              ),
-            )
-          ),
+                color: Color(0XFF74A2FC),
+              )),
+         
           Container(
             margin: EdgeInsets.only(top: 20, left: 18),
             child: Column(

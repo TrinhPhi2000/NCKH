@@ -37,27 +37,33 @@ class _GVCNState extends State<GVCN> {
                             ),  
                         Container(
                           margin: EdgeInsets.only(
-                            top: 89,
-                            right: 30
+                             top: 89,
+                             right: 30
                           ),
                           child: Row(
                             children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(
-                                  bottom: 20
-                                ),
-                                width: 70,
-                                height: 70,
-                                
-                                    child: ClipOval(
-                                  child: Image.asset(
-                                    "assets/images/student.png",
-                                    fit: BoxFit.cover,
-                                    width: 70,
-                                    height: 70,
-                                  ),
-                                )
+                             Container(
+                            margin: EdgeInsets.only(
+                                left: 15,
+                                //top: 35,
+                                right: 20,
+                                bottom: 20
+                            ),
+                            
+                            child:  ClipRRect(
+                              
+                              // borderRadius: BorderRadius.circular(20),
+                              child: InkWell(                                
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
+                                fit: BoxFit.cover,
+                                color: Colors.white,
                               ),
+                           
+                              )
+                            ),
+                           
+                          ),
                                Container(
                             margin: EdgeInsets.only(left: 15, bottom: 15),
                             child: Center(

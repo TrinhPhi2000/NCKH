@@ -45,22 +45,29 @@ class _StudentDetailState extends State<StudentDetail> {
                           ),
                           child: Row(
                             children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(
-                                  bottom: 20
-                                ),
-                                width: 70,
-                                height: 70,
-                                
-                                    child: ClipOval(
-                                  child: Image.asset(
-                                    "assets/images/student.png",
-                                    fit: BoxFit.cover,
-                                    width: 70,
-                                    height: 70,
-                                  ),
-                                )
+                               Container(
+                            margin: EdgeInsets.only(
+                              bottom: 20,
+                              right: 10
+                                // left: 35,
+                                // top: 35,
+                                // right: 20
+                            ),
+
+                            child:  ClipRRect(
+                              
+                              // borderRadius: BorderRadius.circular(20),
+                              child: InkWell(                                
+                                  child: Image.asset('assets/images/thongtinsinhvien.png', height: 40, width: 40,
+                                  
+                                fit: BoxFit.cover,
+                                color: Colors.white,
                               ),
+                              
+                              )
+                            ),
+                           
+                          ),
                               Container(
                                 margin: EdgeInsets.only(
                                   top: 20,
@@ -104,52 +111,52 @@ class _StudentDetailState extends State<StudentDetail> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(
-                                  top: 22,
-                                  left: 30
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      child: RichText(
-                                        text: TextSpan(children: [
-                                          TextSpan(
-                                              text: "3.7",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                          TextSpan(
-                                              text: "/4",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                        ]),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        top: 10
-                                      ),
-                                      height: 15,
-                                      width: 40,
-                                      child: Text(
-                                        "GPA",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 11),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        color: Color.fromRGBO(28, 42, 75, 100),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
+                        //       Container(
+                        //         margin: EdgeInsets.only(
+                        //           top: 22,
+                        //           left: 30
+                        //         ),
+                        //         child: Column(
+                        //           children: <Widget>[
+                        //             Container(
+                        //               child: RichText(
+                        //                 text: TextSpan(children: [
+                        //                   TextSpan(
+                        //                       text: "3.7",
+                        //                       style: TextStyle(
+                        //                           color: Colors.white,
+                        //                           fontWeight: FontWeight.bold)),
+                        //                   TextSpan(
+                        //                       text: "/4",
+                        //                       style: TextStyle(
+                        //                           color: Colors.white,
+                        //                           fontWeight: FontWeight.bold)),
+                        //                 ]),
+                        //               ),
+                        //             ),
+                        //             Container(
+                        //               margin: EdgeInsets.only(
+                        //                 top: 10
+                        //               ),
+                        //               height: 15,
+                        //               width: 40,
+                        //               child: Text(
+                        //                 "GPA",
+                        //                 style: TextStyle(
+                        //                     fontWeight: FontWeight.bold,
+                        //                     color: Colors.white,
+                        //                     fontSize: 11),
+                        //                 textAlign: TextAlign.center,
+                        //               ),
+                        //               decoration: BoxDecoration(
+                        //                 borderRadius: BorderRadius.all(
+                        //                     Radius.circular(20)),
+                        //                 color: Color.fromRGBO(28, 42, 75, 100),
+                        //               ),
+                        //             )
+                        //           ],
+                        //         ),
+                        //       )
                             ],
                           ),
                         ),

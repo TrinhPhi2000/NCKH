@@ -5,21 +5,20 @@ import 'package:canh_bao_hoc_vu/screen/diemthi.dart';
 import 'package:canh_bao_hoc_vu/screen/gvcn.dart';
 import 'package:canh_bao_hoc_vu/screen/hocphi.dart';
 import 'package:canh_bao_hoc_vu/screen/lichhoc_diemdanh.dart';
-import 'package:canh_bao_hoc_vu/screen/reset_password.dart';
 import 'package:canh_bao_hoc_vu/screen/student_detail.dart';
 import 'package:canh_bao_hoc_vu/screen/thongkediemdanh.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
+// import 'package:flutter/rendering.dart';
+// import 'package:intl/date_symbol_data_local.dart';
+// import 'package:intl/intl.dart';
 import 'screen/home_page.dart';
 import 'screen/student.dart';
 import 'package:http/http.dart' as http;
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:canh_bao_hoc_vu/screen/tt_phuhuynh.dart';
-import 'package:table_calendar/table_calendar.dart';
+// import 'package:table_calendar/table_calendar.dart';
 
 void main() => runApp(
    DevicePreview(
@@ -27,6 +26,8 @@ void main() => runApp(
     builder: (context) => MyApp(), // Wrap your app
   ),
 );
+
+
   
 
 
@@ -46,13 +47,13 @@ class MyApp extends StatelessWidget {
         '/phuhuynh': (context) => PhuHuynh(),
         '/sinhvien': (context) => StudentDetails(),
         '/sinhvien1': (context) => StudentDetail(),
-        '/sinhvien2':(context) => DiemThi(),
-        //'sinhvien1': (context) => StudentDetail(),
+        '/sinhvien2':(context) => DiemThi(), 
         '/thoikhoabieu': (context)=> LichHocDiemDanh(),
         '/diem':(context) => DiemThi(),
         '/hocphi':(context) =>HocPhi(),
         '/gvcn':(context) => GVCN(),
         '/tkdd':(context) => ThongKeDiemDanh(),
+        '/diemrenluyen': (context) => DiemThi()
          
       },
       debugShowCheckedModeBanner: false,
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                           right: 25,
                         ),
                         child: Center(
-                          child: Image.asset("assets/images/school_login.png"),
+                          child: Image.asset("assets/images/logo.png", width: 220, height: 220,),
                         ),
                       ),
     
@@ -110,15 +111,19 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.only(
-                          bottom: 25,
-                          right: 198
+                          top: 30,
+                          //right: 90
+                          // left: 24,
+                          // // bottom: 25,
+                          // right: 198
                       ),
                       child:  Center(
                         child: Text(
                           "Đăng Nhập",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Color(0xffb40284a),
-                              fontSize: 25,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold
                           ),
                         ),
@@ -159,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                               right: 26,
                             ),
                             child: TextField(
+                              obscureText: true,
                               controller: passController,
                               style: TextStyle(
                                 fontSize: 13,
@@ -209,20 +215,20 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    Container(
-                      child: RawMaterialButton(
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => ResetPassWord()));
-                        },
-                        child: Text("Quên mật khẩu ?",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold
-                        ),
-                        ),
-                      ),
+                    // Container(
+                    //   child: RawMaterialButton(
+                    //     onPressed: (){
+                    //       Navigator.push(context, MaterialPageRoute(builder: (_) => ResetPassWord()));
+                    //     },
+                    //     child: Text("Quên mật khẩu ?",
+                    //     style: TextStyle(
+                    //       color: Colors.blue,
+                    //       fontWeight: FontWeight.bold
+                    //     ),
+                    //     ),
+                    //   ),
                     
-                    ),
+                    // ),
                     Container(
                       margin: EdgeInsets.only(
                         left: 26,
